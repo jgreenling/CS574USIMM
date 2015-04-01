@@ -1,0 +1,41 @@
+PARSEC
+======
+black - blackscholes
+face - facesim
+fluid - fluidanimate
+ferret - ferret
+freq - freqmine
+stream - streamcluster
+swapt - swaptions
+MT-canneal - 4 threaded canneal
+MT-fluid - 4 threaded fluidanimate
+
+Biobench
+========
+fasta-dna
+fasta-protein
+tigr
+mummer
+hmmer
+
+SPEC CPU 2006
+=============
+gems - GemsFDTD
+lbm - lbm
+leslie - leslie3d
+libq - libquantum
+mcf - mcf
+
+STREAM
+======
+stream2 - STREAM benchmark
+
+Commercial Workloads from Intel
+===============================
+comm*
+
+
+
+
+
+

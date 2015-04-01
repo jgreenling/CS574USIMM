@@ -1,0 +1,34 @@
+
+#bin/usimm input/1channel.cfg input/MT0-canneal input/MT1-canneal input/MT2-canneal input/MT3-canneal > output/MTc-1_first18 &
+#bin/usimm input/4channel.cfg input/MT0-canneal input/MT1-canneal input/MT2-canneal input/MT3-canneal > output/MTc-4_first18 &
+#bin/usimm input/4channel.cfg input/fluid input/fluid input/swapt input/swapt input/comm2 input/comm2 input/ferret input/ferret > output/fl-fl-sw-sw-c2-c2-fe-fe-4_first18 &
+#bin/usimm input/4channel.cfg input/fluid input/fluid input/swapt input/swapt input/comm2 input/comm2 input/ferret input/ferret input/black input/black input/freq input/freq input/comm1 input/comm1 input/stream input/stream > output/fl-fl-sw-sw-c2-c2-fe-fe-bl-bl-fr-fr-c1-c1-st-st-4_first18 &
+#bin/usimm input/4channel.cfg input/comm3 input/comm3 input/comm3 input/comm3 input/comm3 input/comm3 input/comm3 input/comm3 > output/c3-c3-c3-c3-c3-c3-c3-c3-4_last14 &
+#bin/usimm input/4channel.cfg input/libq input/libq input/libq input/mummer input/mummer input/mummer input/tigr input/tigr > output/li-li-li-mu-mu-mu-ti-ti-4_last14 &
+#bin/usimm input/1channel.cfg input/black input/black input/freq input/freq > output/bl-bl-fr-fr-1_first18 &
+#bin/usimm input/4channel.cfg input/black input/black input/freq input/freq > output/bl-bl-fr-fr-4_first18 &
+#bin/usimm input/1channel.cfg input/comm2 > output/c2-1_first18 &
+#bin/usimm input/1channel.cfg input/comm1 input/comm1 > output/c1-c1-1_first18 &
+#bin/usimm input/1channel.cfg input/comm1 input/comm1 input/comm2 input/comm2 > output/c1-c1-c2-c2-1_first18 &
+#bin/usimm input/1channel.cfg input/fluid input/swapt input/comm2 input/comm2 > output/fl-sw-c2-c2-1_first18 &
+#bin/usimm input/1channel.cfg input/face input/face input/ferret input/ferret > output/fa-fa-fe-fe-1_first18 &
+#bin/usimm input/1channel.cfg input/stream input/stream input/stream input/stream > output/st-st-st-st-1_first18 &
+#bin/usimm input/4channel.cfg input/comm2 > output/c2-4_first18 &
+#bin/usimm input/4channel.cfg input/comm1 input/comm1 > output/c1-c1-4_first18 &
+#bin/usimm input/4channel.cfg input/comm1 input/comm1 input/comm2 input/comm2 > output/c1-c1-c2-c2-4_first18 &
+#bin/usimm input/4channel.cfg input/fluid input/swapt input/comm2 input/comm2 > output/fl-sw-c2-c2-4_first18 &
+#bin/usimm input/4channel.cfg input/face input/face input/ferret input/ferret > output/fa-fa-fe-fe-4_first18 &
+#bin/usimm input/4channel.cfg input/stream input/stream input/stream input/stream > output/st-st-st-st-4_first18 &
+
+#bin/usimm input/1channel.cfg input/libq input/libq > output/li-li-1_last14 &
+#bin/usimm input/1channel.cfg input/libq input/libq input/mummer input/mummer > output/li-li-mu-mu-1_last14 &
+#bin/usimm input/1channel.cfg input/leslie input/leslie input/leslie input/leslie > output/le-le-le-le-1_last14 &
+#bin/usimm input/1channel.cfg input/MT0-fluid input/MT1-fluid input/MT2-fluid input/MT3-fluid > output/MTf-1_last14 &
+#bin/usimm input/1channel.cfg input/comm4 input/comm4 input/comm5 input/comm5 > output/c4-c4-c5-c5-1_last14 &
+#bin/usimm input/4channel.cfg input/tigr input/tigr > output/ti-ti-4_last14 &
+#bin/usimm input/4channel.cfg input/libq input/libq > output/li-li-4_last14 &
+#bin/usimm input/4channel.cfg input/libq input/libq input/mummer input/mummer > output/li-li-mu-mu-4_last14 &
+#bin/usimm input/4channel.cfg input/leslie input/leslie input/leslie input/leslie > output/le-le-le-le-4_last14 &
+#bin/usimm input/4channel.cfg input/MT0-fluid input/MT1-fluid input/MT2-fluid input/MT3-fluid > output/MTf-4_last14 &
+#bin/usimm input/4channel.cfg input/comm4 input/comm4 input/comm5 input/comm5 > output/c4-c4-c5-c5-4_last14 &
+bin/usimm input/1channel.cfg input/tigr input/tigr > output/ti-ti-1_last14 &
