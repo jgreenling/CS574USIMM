@@ -65,8 +65,8 @@ int main(int argc, char * argv[])
 
   /* Initialization code. */
   printf("Initializing.\n");
-  argv[1]="../input/1channel.cfg";
-  argv[2]="../input/comm5";
+ // argv[1]="/input/1channel.cfg";
+  //argv[2]="/input/comm5";
 
 
   printf(argv[1]);
@@ -151,15 +151,15 @@ int main(int argc, char * argv[])
 
 	/* Find the appropriate .vi file to read*/
 	if (NUM_CHANNELS == 1 && NUMCORES == 1) {
-  		vi_file = fopen("../input/1Gb_x4.vi", "r");
+  		vi_file = fopen("input/1Gb_x4.vi", "r");
 		chips_per_rank= 16;
   		printf("Reading vi file: 1Gb_x4.vi\t\n%d Chips per Rank\n",chips_per_rank); 
 	} else if (NUM_CHANNELS == 1 && NUMCORES == 2) {
-  		vi_file = fopen("../input/2Gb_x4.vi", "r");
+  		vi_file = fopen("/input/2Gb_x4.vi", "r");
 		chips_per_rank= 16;
   		printf("Reading vi file: 2Gb_x4.vi\t\n%d Chips per Rank\n",chips_per_rank);
 	} else if (NUM_CHANNELS == 1 && (NUMCORES > 2) && (NUMCORES <= 4)) {
-  		vi_file = fopen("../input/4Gb_x4.vi", "r");
+  		vi_file = fopen("/input/4Gb_x4.vi", "r");
 		chips_per_rank= 16;
   		printf("Reading vi file: 4Gb_x4.vi\t\n%d Chips per Rank\n",chips_per_rank);
 	} else if (NUM_CHANNELS == 4 && NUMCORES == 1) {
