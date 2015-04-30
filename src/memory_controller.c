@@ -98,12 +98,12 @@ void init_memory_controller_vars()
 
 				cmd_precharge_issuable[i][j][k] = 0;
 
-				stats_num_activate_read[i][j][k]=0;
-				stats_num_activate_write[i][j][k]=0;
+				stats_num_activate_read[i][j][k]=0; //gets the total reads when it's not a row buffer hit, when the row activates
+				stats_num_activate_write[i][j][k]=0; //gets the total writes when it's not a row buffer hit, when the row activates
 				stats_num_activate_spec[i][j][k]=0;
 				stats_num_precharge[i][j][k]=0;
-				stats_num_read[i][j][k]=0;
-				stats_num_write[i][j][k]=0;
+				stats_num_read[i][j][k]=0; //gets the total reads for row buffer hit
+				stats_num_write[i][j][k]=0; //get the total writes for row buffer hit
 				cas_issued_current_cycle[i][j][k]=0;
 
 				/* JEG - Row buffer hit */
@@ -1566,9 +1566,9 @@ void print_stats(int channel)
 			printf("\tRank: %d\n", j);
 			for(int k = 0; k < NUM_BANKS; k++)
 			{
-				printf("\t\t\tBank %d read hits: %lld\n", k, read_row_hit[i][j][k]);
-				printf("\t\t\tTotal reads for this bank: %lld\n", (stats_num_read[i][j][k])); // + stats_num_activate_read[i][j][k]));
-				printf("\t\t\tRead Buffer Hit Ratio: %f\n\n", (((double) read_row_hit[i][j][k]) / ((double) (stats_num_read[i][j][k])))); //+ stats_num_activate_read[i][j][k]))));
+				printf("\t\t\tBank %d read hits: %lld\n", k, stats_num_read[i][j][k]);
+				printf("\t\t\tTotal reads for this bank: %lld\n", (stats_num_read[i][j][k] + stats_num_activate_read[i][j][k]));
+				printf("\t\t\tRead Buffer Hit Ratio: %f\n\n", (((double) stats_num_read[i][j][k]) / ((double) (stats_num_read[i][j][k]+ stats_num_activate_read[i][j][k]))));
 				totalReads += stats_num_read[i][j][k];
 			}
 		}
@@ -1586,9 +1586,9 @@ void print_stats(int channel)
 			printf("\tRank: %d\n", j);
 			for(int k = 0; k < NUM_BANKS; k++)
 			{
-				printf("\t\t\tBank %d write hits: %lld\n", k, write_row_hit[i][j][k]);
-				printf("\t\t\tTotal writes for this bank: %lld\n", (stats_num_write[i][j][k])); //+ stats_num_activate_write[i][j][k]));
-				printf("\t\t\tWrite Buffer Hit Ratio: %f\n\n", (((double) write_row_hit[i][j][k]) / ((double) (stats_num_write[i][j][k])))); //+ + stats_num_activate_write[i][j][k]))));
+				printf("\t\t\tBank %d write hits: %lld\n", k, stats_num_write[i][j][k]);
+				printf("\t\t\tTotal writes for this bank: %lld\n", (stats_num_write[i][j][k]+ stats_num_activate_write[i][j][k]));
+				printf("\t\t\tWrite Buffer Hit Ratio: %f\n\n", (((double) stats_num_write[i][j][k]) / ((double) (stats_num_write[i][j][k] + stats_num_activate_write[i][j][k]))));
 				totalWrites += stats_num_write[i][j][k];
 			}
 		}
