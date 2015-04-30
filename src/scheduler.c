@@ -121,8 +121,8 @@ void schedule(int channel)
 
 	// Draining Reads
 	// look through the queue and find the first request whose
-	// command can be issued in this cycle and issue it
-	// Simple FCFS
+	// command can be issued in this cycle and issue it 
+	// Simple FCFS 
 	if(!drain_writes[channel])
 	{
 		LL_FOREACH(read_queue_head[channel],rd_ptr)
