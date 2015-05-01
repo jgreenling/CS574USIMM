@@ -107,8 +107,8 @@ void init_memory_controller_vars()
 				cas_issued_current_cycle[i][j][k]=0;
 
 				/* JEG - Row buffer hit */
-				read_row_hit[i][j][k] = 0;
-				write_row_hit[i][j][k] = 0;
+				read_row_num[i][j][k] = 0;
+				write_row_num[i][j][k] = 0;
 
 			}
 
@@ -326,6 +326,12 @@ void * init_new_node(long long int physical_address, long long int arrival_time,
 		new_node->dram_addr.bank = this_node_addr->bank;
 		new_node->dram_addr.row = this_node_addr->row;
 		new_node->dram_addr.column = this_node_addr->column;
+
+		/* JEG */
+		if(type == READ)
+			read_row_num[new_node->dram_addr.channel][new_node->dram_addr.rank][new_node->dram_addr.bank]++;
+		else
+			write_row_num[new_node->dram_addr.channel][new_node->dram_addr.rank][new_node->dram_addr.bank]++;
 
 		free(this_node_addr);
 
@@ -766,12 +772,12 @@ int issue_request_command(request_t * request)
 			if(request->operation_type == READ)
 			{
 				stats_num_activate_read[channel][rank][bank]++;
-				read_row_hit[channel][rank][bank]--;
+				//read_row_hit[channel][rank][bank]--;
 			}
 			else
 			{
 				stats_num_activate_write[channel][rank][bank]++;
-				write_row_hit[channel][rank][bank]--;
+				//write_row_hit[channel][rank][bank]--;
 			}
 
 			stats_num_activate[channel][rank]++;
@@ -820,8 +826,8 @@ int issue_request_command(request_t * request)
 			stats_reads_completed[channel] ++;
 
 			/* JEG */
-			if(row == dram_state[channel][rank][bank].active_row)
-				read_row_hit[channel][rank][bank]++;
+			//if(row == dram_state[channel][rank][bank].active_row)
+				//read_row_hit[channel][rank][bank]++;
 
 			stats_average_read_latency[channel] = ((stats_reads_completed[channel]-1)*stats_average_read_latency[channel] + request->latency)/stats_reads_completed[channel];
 			stats_average_read_queue_latency[channel] = ((stats_reads_completed[channel]-1)*stats_average_read_queue_latency[channel] + (request->dispatch_time - request->arrival_time))/stats_reads_completed[channel];
@@ -882,8 +888,8 @@ int issue_request_command(request_t * request)
 			stats_writes_completed[channel]++;
 
 			/* JEG */
-			if(row == dram_state[channel][rank][bank].active_row)
-				write_row_hit[channel][rank][bank]++;
+			//if(row == dram_state[channel][rank][bank].active_row)
+				//write_row_hit[channel][rank][bank]++;
 
 			stats_num_write[channel][rank][bank]++;
 
@@ -1566,9 +1572,9 @@ void print_stats(int channel)
 			printf("\tRank: %d\n", j);
 			for(int k = 0; k < NUM_BANKS; k++)
 			{
-				printf("\t\t\tBank %d read hits: %lld\n", k, stats_num_read[i][j][k]);
-				printf("\t\t\tTotal reads for this bank: %lld\n", (stats_num_read[i][j][k] + stats_num_activate_read[i][j][k]));
-				printf("\t\t\tRead Buffer Hit Ratio: %f\n\n", (((double) stats_num_read[i][j][k]) / ((double) (stats_num_read[i][j][k]+ stats_num_activate_read[i][j][k]))));
+				printf("\t\t\tBank %d read hits: %lld\n", k, (stats_num_read[i][j][k] - stats_num_activate_read[i][j][k]));
+				printf("\t\t\tTotal reads for this bank: %lld\n", read_row_num[i][j][k]); //(stats_num_read[i][j][k] + read_row_num[i][j][k]));
+				printf("\t\t\tRead Buffer Hit Ratio: %f\n\n", (((double) (stats_num_read[i][j][k] - stats_num_activate_read[i][j][k]) / ((double) read_row_num[i][j][k]))));
 				totalReads += stats_num_read[i][j][k];
 			}
 		}
@@ -1586,9 +1592,9 @@ void print_stats(int channel)
 			printf("\tRank: %d\n", j);
 			for(int k = 0; k < NUM_BANKS; k++)
 			{
-				printf("\t\t\tBank %d write hits: %lld\n", k, stats_num_write[i][j][k]);
-				printf("\t\t\tTotal writes for this bank: %lld\n", (stats_num_write[i][j][k]+ stats_num_activate_write[i][j][k]));
-				printf("\t\t\tWrite Buffer Hit Ratio: %f\n\n", (((double) stats_num_write[i][j][k]) / ((double) (stats_num_write[i][j][k] + stats_num_activate_write[i][j][k]))));
+				printf("\t\t\tBank %d write hits: %lld\n", k, (stats_num_write[i][j][k] - stats_num_activate_write[i][j][k]));
+				printf("\t\t\tTotal writes for this bank: %lld\n", write_row_num[i][j][k]); //stats_num_activate_write[i][j][k]));
+				printf("\t\t\tWrite Buffer Hit Ratio: %f\n\n", (((double) (stats_num_write[i][j][k] - stats_num_activate_write[i][j][k]) / ((double) write_row_num[i][j][k]))));
 				totalWrites += stats_num_write[i][j][k];
 			}
 		}

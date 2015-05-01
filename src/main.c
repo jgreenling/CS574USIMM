@@ -163,7 +163,7 @@ int main(int argc, char * argv[])
 		chips_per_rank= 16;
   		printf("Reading vi file: 4Gb_x4.vi\t\n%d Chips per Rank\n",chips_per_rank);
 	} else if (NUM_CHANNELS == 4 && NUMCORES == 1) {
-  		vi_file = fopen("../input/1Gb_x16.vi", "r");
+  		vi_file = fopen("input/1Gb_x16.vi", "r");
 		chips_per_rank= 4;
   		printf("Reading vi file: 1Gb_x16.vi\t\n%d Chips per Rank\n",chips_per_rank);
 	} else if (NUM_CHANNELS == 4 && NUMCORES == 2) {

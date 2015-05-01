@@ -125,8 +125,8 @@ long long int stats_page_hits[MAX_NUM_CHANNELS];
 double stats_read_row_hit_rate[MAX_NUM_CHANNELS];
 
 /* JEG - row buffer hit */
-long long int read_row_hit[MAX_NUM_CHANNELS][MAX_NUM_RANKS][MAX_NUM_BANKS];
-long long int write_row_hit[MAX_NUM_CHANNELS][MAX_NUM_RANKS][MAX_NUM_BANKS];
+long long int read_row_num[MAX_NUM_CHANNELS][MAX_NUM_RANKS][MAX_NUM_BANKS];
+long long int write_row_num[MAX_NUM_CHANNELS][MAX_NUM_RANKS][MAX_NUM_BANKS];
 
 // Time spent in various states
 long long int stats_time_spent_in_active_standby[MAX_NUM_CHANNELS][MAX_NUM_RANKS];
